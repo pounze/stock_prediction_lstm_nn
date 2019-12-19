@@ -1,0 +1,47 @@
+https://www.nseindia.com/products/content/equities/equities/archieve_eq.htm
+
+var initDate = new Date("2009-12-31");
+
+function getNewDate()
+{
+                initDate.setDate(initDate.getDate() + 1);
+
+                var day = initDate.getDate();
+
+                day = day.toString().length === 1 ? "0"+day : day;
+
+                var month = initDate.getMonth() + 1;
+
+                month = month.toString().length === 1 ? "0"+month : month;
+
+                var year = initDate.getFullYear();
+
+                return day+"-"+month+"-"+year;
+}
+
+function downloadFile()
+{
+                var date = getNewDate();
+
+                console.log(date);
+
+                document.getElementById("date").value = date;
+                validateInput();
+                
+                setTimeout(function()
+                {
+                                if(
+                                                document.getElementsByTagName("td")[0] === undefined
+                                                ||
+                                                document.getElementsByTagName("td")[0].children[0] === undefined
+                                )
+                                {
+                                                downloadFile();
+                                }
+                                else
+                                {
+                                                document.getElementsByTagName("td")[0].children[0].click();
+                                                downloadFile();
+                                }
+                },2000);
+}
